@@ -43,17 +43,25 @@ app.MapGet("/api/Movies", () =>
 })
     .WithName("GetMovies");
 
+app.MapPost("/api/movies", async (Movie newMovie) =>
+{
+    movies.Add(newMovie);
+})
+    .WithName("PostMovie");
+
 app.MapGet("/api/Movies/{id}", async (int id) =>
 {
     return movies[id];
 })
     .WithName("GetMovie");
 
-app.MapPost("/api/movies", async (Movie newMovie) =>
+app.MapDelete("/api/Movies/{id}", async (int id) =>
 {
-    movies.Add(newMovie);
+    movies.RemoveAt(id);
 })
-    .WithName("PostMovie");
+    .WithName("DeleteMovie");
+
+
 
 
 app.Run();
